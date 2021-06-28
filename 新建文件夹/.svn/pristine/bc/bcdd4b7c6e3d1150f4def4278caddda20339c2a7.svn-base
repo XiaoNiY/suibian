@@ -1,0 +1,61 @@
+<nav #navScroll>
+  <div class="nav-box">
+    <div class="nav-item" *ngFor="let aItem of navData">
+      <a
+        class="btn btn-inline"
+        [class.active]="activedNav == aItem"
+        (click)="onActive(aItem)"
+      >
+        <svg class="icon" aria-hidden="true">
+          <use [attr.xlink:href]="'#icon-' + aItem.icon"></use>
+        </svg>
+        <span>{{ aItem.title }}</span>
+        <!-- <svg class="icon" aria-hidden="true" *ngIf="aItem.children">
+          <use [attr.xlink:href]="aItem.open ? '#icon-arrow-up' : '#icon-arrow-down'"></use>
+        </svg> -->
+      </a>
+      <ul *ngIf="aItem.children && aItem.open">
+        <li *ngFor="let bItem of aItem.children">
+          <a
+            class="btn btn-inline"
+            [class.active]="activedNav == bItem"
+            (click)="onActive(bItem)"
+            >{{ bItem.title }}</a
+          >
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="device">
+    <div class="nodevice" *ngIf="!pccService.activedDevice">
+      <p>
+        <svg class="icon" aria-hidden="true">
+          <use [attr.xlink:href]="'#icon-nodevice'"></use>
+        </svg>
+        未连接设备
+      </p>
+      <p>请用数据线将苹果设备连接到您的电脑</p>
+    </div>
+    <div class="hasdevice" *ngIf="pccService.activedDevice">
+      <p>当前设备：</p>
+      <p title="{{ pccService.activedDevice.device }}">
+        <svg class="icon" aria-hidden="true">
+          <use [attr.xlink:href]="'#icon-' + pccService.activedDevice.icon"></use>
+        </svg>
+        <span>{{ pccService.activedDevice.device }}</span>
+      </p>
+      <p [attr.title]="pccService.activedDevice.name | html" [innerHtml]="pccService.activedDevice.name"></p>
+      <app-dropdown
+        *ngIf="pccService.devices.length > 1"
+        [id]="'select-device'"
+        [position]="[true, false, false, true]"
+        [label]="''"
+        [options]="pccService.devices"
+        [selected]="pccService.activedDevice"
+        [small]="true"
+        (select)="selectDevice($event)"
+      >
+      </app-dropdown>
+    </div>
+  </div>
+</nav>

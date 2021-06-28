@@ -1,0 +1,55 @@
+<div class="page-content page-table">
+  <div class="page-loading" *ngIf="status === 'loading'">
+    <i class="icon icon-loading"></i>加载中...
+  </div>
+
+  <app-error
+    *ngIf="error"
+    [message]="error.message"
+    [icon]="error.icon"
+    [retry]="error.retry"
+    (retryEvent)="reset()"
+  ></app-error>
+
+  <div class="table" *ngIf="datas.length > 0">
+    <div class="table-head">
+      <div class="table-row">
+        <div class="table-column">产品类型</div>
+        <div class="table-column" *ngIf="groupType.value == 1">固件版本</div>
+        <div class="table-column" *ngIf="groupType.value == 2">设备名称</div>
+        <div class="table-column">设备型号</div>
+        <div class="table-column">固件大小</div>
+
+        <div class="table-column">下载</div>
+        <div class="table-column">可否刷机</div>
+        <div class="table-column">可否越狱</div>
+      </div>
+    </div>
+    <div class="table-body">
+      <div class="table-row" *ngFor="let firmware of datas">
+        <div class="table-column" title="{{ firmware.productName }}">{{ firmware.productType }}</div>
+        <div class="table-column" *ngIf="groupType.value == 1" title="{{ firmware.productName }}">
+          {{ firmware.iosVersion }}
+          <span class="testVersion" *ngIf="firmware.types == 60">测试版</span>
+        </div>
+        <div class="table-column" *ngIf="groupType.value == 2" title="{{ firmware.productName }}">{{ firmware.name }}</div>
+        <div class="table-column" title="{{ firmware.productModel }}">{{ firmware.productModel }}</div>
+        <div class="table-column">{{ firmware.sizes }}</div>
+
+        <div class="table-column">
+          <a class="btn btn-inline btn-download" (click)="download(firmware)">
+            <svg class="icon" aria-hidden="true">
+              <use [attr.xlink:href]="'#icon-download2'"></use>
+            </svg>
+          </a>
+        </div>
+        <div class="table-column">
+          <span class="status" [attr.title]="firmware.flashTitle" [class.active]="firmware.flash"></span>
+        </div>
+        <div class="table-column">
+          <span class="status" [attr.title]="firmware.jailbreakTitle" [class.active]="firmware.jailbreak"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,90 @@
+<div class="page-title" *ngIf="!keyword">
+  <h2 *ngIf="title">{{ title }}</h2>
+</div>
+<div class="searchTitle" *ngIf="keyword">
+  <span>在“爱思铃声</span>
+  <span *ngIf="ringType"> - {{ ringType.name }}</span>
+  <span>”里，搜索“</span>
+  <span class="keyword">{{ keyword }}</span> <span>”找到</span>
+  <span class="count">{{ searchCount }}</span> <span>条相关数据</span>
+  <span>（去“</span>
+  <span class="btn btn-inline" (click)="toKuyinSearch()">酷音铃声</span>
+  <span>”中搜索）</span>
+</div>
+<div class="page-content page-table" (scroll)="onScroll($event)" #pagecontent>
+  <div class="page-loading" *ngIf="status === 'loading' && pageno == 1">
+    <i class="icon icon-loading"></i>加载中...
+  </div>
+
+  <app-error
+    *ngIf="error"
+    [message]="error.message"
+    [icon]="error.icon"
+    [retry]="error.retry"
+    (retryEvent)="reset()"
+  ></app-error>
+
+  <div class="table">
+    <div class="table-head">
+      <div class="table-row">
+        <div class="table-column">&nbsp;</div>
+        <div class="table-column">铃声名称</div>
+
+        <div class="table-column">操作</div>
+        <div class="table-column">下载次数</div>
+        <div class="table-column">大小</div>
+        <div class="table-column">时长</div>
+      </div>
+    </div>
+    <div class="table-body">
+      <div class="table-row" [class.playing]="ring.playing" (dblclick)="audioService.toggle(ring)" *ngFor="let ring of datas">
+        <div class="table-column btn btn-inline" title="{{ ring.rtypeName }}" (click)="classifyRings(ring)"><img src="{{ ring.ricon }}" /></div>
+        <div class="table-column" title="{{ ring.name }}" [innerHtml]="ring.name">
+        </div>
+
+        <div class="table-column">
+          <a
+            class="btn btn-inline btn-play"
+            [attr.title]="ring.playing ? '停止' : '点击播放'"
+            (click)="toggleRing(ring, $event)"
+            (contextmenu)="toggleRing(ring, $event)"
+          >
+            <svg *ngIf="!ring.playing" class="icon" aria-hidden="true">
+              <use [attr.xlink:href]="'#icon-play'"></use>
+            </svg>
+            <svg *ngIf="ring.playing" class="icon" aria-hidden="true">
+              <use [attr.xlink:href]="'#icon-rotate'"></use>
+            </svg>
+            <svg *ngIf="ring.playing" class="icon" aria-hidden="true">
+              <use [attr.xlink:href]="'#icon-stop'"></use>
+            </svg>
+          </a>
+          <a class="btn btn-inline btn-download" title="点击下载" (click)="pccService.downloadRing(ring)">
+            <svg class="icon" aria-hidden="true">
+              <use [attr.xlink:href]="'#icon-download'"></use>
+            </svg>
+          </a>
+        </div>
+        <div class="table-column">{{ ring.download }}</div>
+        <div class="table-column">{{ ring.m4rsize | sizeReform }}</div>
+        <div class="table-column">
+          {{ ring.duration | durationReform }}
+        </div>
+        <div
+          class="current"
+          *ngIf="ring.playing"
+          [ngStyle]="{
+            width: (ring.currentTime / ring.duration) * 100 + '%'
+          }"
+        ></div>
+      </div>
+      <app-data-status
+        *ngIf="pageno > 1"
+        [status]="status"
+        (retryEvent)="getDatas()"
+      ></app-data-status>
+    </div>
+    <p class="btn btn-pi">第{{ viewPageno }}页</p>
+    <app-btn-totop [pcec]="'page-content'"></app-btn-totop>
+  </div>
+</div>

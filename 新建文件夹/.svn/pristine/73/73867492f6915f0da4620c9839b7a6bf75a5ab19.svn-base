@@ -1,0 +1,25 @@
+<a
+  class="btn btn-off btn-back"
+  [class.disabled]="pageHistoryService.index < 1"
+  (click)="back()"
+  >
+  <svg class="icon" aria-hidden="true">
+    <use [attr.xlink:href]="'#icon-arrow-left'"></use>
+  </svg>
+</a>
+<a
+  class="btn btn-off btn-forward"
+  [class.disabled]="
+    pageHistoryService.index == pageHistoryService.pages.length - 1
+  "
+  (click)="forward()"
+  >
+  <svg class="icon" aria-hidden="true">
+    <use [attr.xlink:href]="'#icon-arrow-right'"></use>
+  </svg>
+</a>
+<a class="btn btn-off btn-refresh" (click)="refresh()">
+  <svg class="icon" aria-hidden="true">
+    <use [attr.xlink:href]="'#icon-refresh'"></use>
+  </svg>
+</a>

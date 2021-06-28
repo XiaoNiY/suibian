@@ -1,0 +1,74 @@
+.page-content {
+  width:100%;
+  left:0;
+}
+.table-head {
+  width:100%;
+  left:0;
+  top:45px;
+}
+.table-body .table-row {
+  height: 32px;
+  line-height: 32px;
+}
+.table-column {
+  height:100%;
+  padding:0 10px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.table-column:nth-child(1) {
+  width:109px;
+  padding-left:18px;
+}
+.table-column:nth-child(2) {
+  width:168px;
+}
+.table-column:nth-child(3) {
+  width:190px;
+}
+.table-body .table-column:nth-child(3),
+.table-body .table-column:nth-child(4) {
+  color:#757575;
+}
+.table-column:nth-child(5),
+.table-column:nth-child(6),
+.table-column:nth-child(7) {
+  float:right;
+}
+.table-column:nth-child(6) {
+  width:90px;
+}
+.table-column:nth-child(4),
+.table-column:nth-child(5),
+.table-column:nth-child(7) {
+  width:80px;
+}
+
+.btn-download {
+  width:20px;
+  height:20px;
+  line-height: 20px;
+  font-size:20px;
+  position: absolute;
+  left:14px;
+  top:50%;
+  margin-top:-10px;
+}
+
+.status {
+  width:8px;
+  height:8px;
+  border:1px solid #b6b6b6;
+  border-radius: 4px;
+  position: absolute;
+  left:30px;
+  top:50%;
+  margin-top:-4px;
+}
+.status.active {
+  border:1px solid #00b10a;
+  background:#33b745;
+}
+

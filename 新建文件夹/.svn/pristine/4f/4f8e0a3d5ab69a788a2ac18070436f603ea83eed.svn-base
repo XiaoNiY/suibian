@@ -1,0 +1,28 @@
+<div class="mask" *ngIf="appsService.clarenceApp">
+  <div class="report">
+    <a class="btn btn-inline btn-close" (click)="close()">关闭</a>
+    <div class="report-title"  >我要许愿</div>
+    <div class="report-content form">
+
+      <div class="form-item">
+        <label>请描述你要找的历史版本</label>
+        <textarea
+          name="content"
+          rows="5"
+          placeholder="请告诉我们，您想要找的历史版本的功能或者历史版本号"
+          [(ngModel)]="content"
+        ></textarea>
+        <p class="ps_text">
+          已输入<span>
+            <b id="jubao_contentLength" [class.text-danger]="content.length>200">{{ content.length }}</b> /
+            200</span
+          >
+          个字符
+        </p>
+      </div>
+    </div>
+    <div class="report-footer">
+      <a class="btn btn-primary btn-submit" (click)="submit()">提交</a>
+    </div>
+  </div>
+</div>

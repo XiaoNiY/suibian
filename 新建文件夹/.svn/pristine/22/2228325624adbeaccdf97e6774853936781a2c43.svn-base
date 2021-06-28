@@ -1,0 +1,39 @@
+<div class="app-images">
+  <div class="app-images-nav">
+    <a
+      class="btn btn-inline"
+      (click)="viewImage('iPhone')"
+      [class.active]="model == 'iPhone'"
+      *ngIf="iPhonePhotos && iPhonePhotos.length > 0"
+      >iPhone</a
+    >
+    <a
+      class="btn btn-inline"
+      (click)="viewImage('iPad')"
+      [class.active]="model == 'iPad'"
+      *ngIf="iPadPhotos && iPadPhotos.length > 0"
+      >iPad</a
+    >
+  </div>
+  <div
+    class="app-images-content"
+    (mousedown)="onMousedown($event)"
+    (mousemove)="onMousemove($event)"
+    #photosBox
+  >
+    <div
+      class="app-images-content-item"
+      [class.active]="model == 'iPhone'"
+      *ngIf="iPhonePhotos && iPhonePhotos.length > 0"
+    >
+      <img *ngFor="let item of iPhonePhotos" src="{{ item }}" />
+    </div>
+    <div
+      class="app-images-content-item"
+      [class.active]="model == 'iPad'"
+      *ngIf="iPadPhotos && iPadPhotos.length > 0"
+    >
+      <img *ngFor="let item of iPadPhotos" src="{{ item }}" />
+    </div>
+  </div>
+</div>

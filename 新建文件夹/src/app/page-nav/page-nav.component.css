@@ -1,0 +1,143 @@
+nav {
+  width:181px;
+  background:#FFF;
+  padding-top:14px;
+  padding-bottom:20px;
+  border-right:1px solid #e2e2e2;
+  overflow-y: scroll;
+  position: fixed;
+  top:45px;
+  left:0;
+  bottom:80px;
+  z-index: 1;
+}
+
+nav::-webkit-scrollbar {
+  width:0;
+}
+
+
+.nav-item a {
+  display: block;
+  width:100%;
+  height:36px;
+  line-height: 38px;
+  padding-left:52px;
+  font-size:12px;
+  color:#0f2851;
+  text-decoration: none;
+  position: relative;
+}
+.nav-item a:hover{
+  background:#eff4fd;
+}
+.nav-item a.active {
+  background:#eff4fd;
+  color:#236ee7;
+}
+.nav-item a.active::before {
+  content: "";
+  display: block;
+  width:2px;
+  height:100%;
+  background:#236ee7;
+  position: absolute;
+  left:0;
+  top:0;
+}
+.nav-item a>.icon {
+  font-size: 20px;
+  position: absolute;
+  left: 25px;
+  top: 50%;
+  margin-top: -10px;
+}
+.nav-item a>.icon:nth-child(3) {
+  left:auto;
+  right:8px;
+}
+
+.device {
+  width:181px;
+  height:79px;
+  background:#f8f8f8;
+  border-top:1px solid #e2e2e2;
+  border-right:1px solid #e2e2e2;
+  position: fixed;
+  bottom:0;
+  left:0;
+}
+.device>.nodevice>p:nth-child(1) {
+  font-size:14px;
+  color:#3c424e;
+  text-indent: 18px;
+  position: absolute;
+  left:16px;
+  top:13px;
+}
+.device>.nodevice>p:nth-child(1) svg {
+  color:#8a8a8a;
+  font-size: 17.5px;
+  position: absolute;
+  left: 0;
+  top: 2px;
+}
+.device>.nodevice>p:nth-child(2) {
+  width:150px;
+  height:30px;
+  line-height: 14px;
+  font-size:12px;
+  color:#AAA;
+  font-family: PingFangSC-Light, sans-serif;
+  position: absolute;
+  top:36px;
+  left:18px;
+}
+.device>.hasdevice>p {
+  max-width: 154px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.device>.hasdevice>p:nth-child(1) {
+  font-size:11px;
+  color:#3c424e;
+  position: absolute;
+  left:18px;
+  top:11px;
+}
+.device>.hasdevice>p:nth-child(2) {
+  width: 154px;
+  height: 21px;
+  font-size:16px;
+  font-family: PingFangSC-Semibold, sans-serif;
+  color:#236ee7;
+  position: absolute;
+  left:18px;
+  top:28px;
+}
+.device>.hasdevice>p:nth-child(2) span{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 138px;
+  display: inline-block;
+  position: absolute;
+  left: 17px;
+}
+.device>.hasdevice svg {
+  font-size: 20px;
+  position: absolute;
+  top:50%;
+  margin-top:-10px;
+  left: -4px;
+}
+
+.device>.hasdevice>p:nth-child(3) {
+  font-size:12px;
+  color:#AAA;
+  position: absolute;
+  top:51px;
+  left:18px;
+}
+

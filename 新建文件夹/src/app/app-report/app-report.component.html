@@ -1,0 +1,84 @@
+<div class="mask" *ngIf="appsService.reportApp">
+  <div class="report">
+    <a class="btn btn-inline btn-close" (click)="close()">关闭</a>
+    <div class="report-title">举报应用</div>
+    <div class="report-content form">
+      <div class="form-item">
+        <label>应用名称</label>
+        <p>{{ appsService.reportApp.AppName }}</p>
+      </div>
+      <div class="form-item">
+        <label>有害信息类型<i>*</i></label>
+        <select name="contentType" [(ngModel)]="type">
+          <option value="0">请选择有害信息类型</option>
+          <option value="1">政治类</option>
+          <option value="2">暴恐类</option>
+          <option value="3">谣言类</option>
+          <option value="4">色情类</option>
+          <option value="5">低俗类</option>
+          <option value="6">赌博类</option>
+          <option value="7">诈骗类</option>
+          <option value="8">侵权类</option>
+          <option value="9">其他</option>
+        </select>
+      </div>
+      <div class="form-item">
+        <label>举报内容<i>*</i></label>
+        <textarea
+          name="content"
+          rows="5"
+          placeholder="请输入举报内容（200个字符以内）"
+          [(ngModel)]="content"
+        ></textarea>
+        <p class="ps_text">
+          已输入<span>
+            <b id="jubao_contentLength" [class.text-danger]="content.length>200">{{ content.length }}</b> /
+            200</span
+          >
+          个字符
+        </p>
+      </div>
+      <div class="form-item">
+        <label>联系方式<i>*</i></label>
+        <input
+          name="contact"
+          type="text"
+          placeholder="请提供你的 电话、QQ、邮箱 其中一种联系方式"
+          maxlength="32"
+          [(ngModel)]="contact"
+        />
+      </div>
+      <div class="attachmentView">
+        <p *ngFor="let item of attachments; let i = index">
+          <img src="{{ item.src }}" [style.margin-top]="item.y + 'px'" />
+          <a class="btn btn-inline" (click)="removeAttachment(i)" >
+            <svg class="icon" aria-hidden="true">
+              <use [attr.xlink:href]="'#icon-close'"></use>
+            </svg>
+          </a>
+        </p>
+      </div>
+      <div class="form-item">
+        <div class="btn btn-default btn-attachment">
+          <input
+            type="file"
+            name="attachments"
+            multiple="multiple"
+            accept="image/jpeg,image/jpg,image/png"
+            (change)="addAttachments($event)"
+          />
+          <svg class="icon" aria-hidden="true">
+            <use [attr.xlink:href]="'#icon-attachment'"></use>
+          </svg>
+          添加附件
+        </div>
+        <span class="ps_text">
+          只能上传jpg、png格式的图片，单张图片不能超过500KB，图片数量不能超过10个
+        </span>
+      </div>
+    </div>
+    <div class="report-footer">
+      <a class="btn btn-primary btn-submit" [class.disabled]="submiting" (click)="submit()">提交</a>
+    </div>
+  </div>
+</div>

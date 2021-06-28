@@ -1,0 +1,59 @@
+
+.btn-appDownload {
+  width:60px;
+  height:24px;
+  line-height: 22px;
+  text-align: center;
+  border: 1px solid #cfcfcf;
+  border-radius: 3px;
+  font-size:12px;
+}
+
+.btn-appDownload.install {
+  border-color:#247ff4;
+  background:#247ff4;
+  color:#FFF;
+}
+.btn-appDownload.install:hover {
+  border-color:#3C8EF8;
+  background:#3C8EF8;
+}
+.btn-appDownload.install:active {
+  border-color:#236ee7;
+  background:#236ee7;
+}
+
+.btn-appDownload.installed {
+  border-color:#CFCFCF;
+  color:#CCC;
+}
+.btn-appDownload.installed:hover {
+  background:#FAFAFA;
+  border-color:#CFCFCF;
+  color:#3C424E;
+}
+.btn-appDownload.installed:active {
+  border-color:#247ff4;
+  background:#247ff4;
+  color:#FFF;
+}
+
+.btn-appDownload.downloading,
+.btn-appDownload.installing,
+.btn-appDownload.pause {
+  border-color:#247ff4;
+  color:#236ee7;
+}
+.btn-appDownload.downloading:hover,
+.btn-appDownload.installing:hover,
+.btn-appDownload.pause:hover {
+  border-color:#3E8EF8;
+  color:#3E8EF8;
+}
+.btn-appDownload.downloading:active,
+.btn-appDownload.installing:active,
+.btn-appDownload.pause:active {
+  border-color:#236ee7;
+  background:#FFF;
+  color:#236ee7;
+}

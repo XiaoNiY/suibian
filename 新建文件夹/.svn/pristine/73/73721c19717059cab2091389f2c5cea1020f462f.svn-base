@@ -1,0 +1,12 @@
+<div class="messages" *ngIf="messageService.messages.length">
+  <p
+    *ngFor="let message of messageService.messages"
+    [class.bg-primary]="message.type == 1"
+    [class.bg-success]="message.type == 2"
+    [class.bg-info]="message.type == 3"
+    [class.bg-warning]="message.type == 4"
+    [class.bg-danger]="message.type == 5"
+  >
+    {{ message.content }}
+  </p>
+</div>

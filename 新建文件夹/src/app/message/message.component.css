@@ -1,0 +1,12 @@
+.messages {
+  width:100%;
+  position: fixed;
+  left:0;
+  top:0;
+  z-index: 5;
+}
+.messages p {
+  line-height: 1.45;
+  padding:10px 0;
+  text-align: center;
+}

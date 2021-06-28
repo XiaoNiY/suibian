@@ -1,0 +1,42 @@
+
+.btn-back,
+.btn-forward,
+.btn-refresh {
+  width:32px;
+  float: left;
+  margin-top:10px;
+  position: relative;
+}
+
+.btn-back {
+  margin-left:16px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.btn-forward {
+  margin-left:-1px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.btn-refresh {
+  margin-left:10px;
+}
+
+
+.btn > .icon {
+  font-size:18px;
+  position: absolute;
+  left:50%;
+  margin-left:-9px;
+  top:50%;
+  margin-top:-9px;
+}
+.btn > .icon:active {
+  opacity: 0.75;
+}
+.btn-back.disabled,
+.btn-forward.disabled {
+  color:#e6e6e6;
+  background:#FFF;
+  border-color:#E6E6E6;
+}

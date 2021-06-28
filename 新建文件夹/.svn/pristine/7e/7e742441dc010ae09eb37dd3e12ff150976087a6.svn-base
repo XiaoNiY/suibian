@@ -1,0 +1,75 @@
+<div class="page-content">
+  <div class="page-loading" *ngIf="status === 'loading'">
+    <i class="icon icon-loading"></i>加载中...
+  </div>
+
+  <app-error *ngIf="error" [message]="error.message" [icon]="error.icon" [retry]="error.retry" (retryEvent)="reset()">
+  </app-error>
+
+  <div class="app-detail" *ngIf="info">
+    <a class="btn btn-default btn-report" (click)="appsService.setReportApp(info)">举报</a>
+
+    <div class="app-baseinfo">
+      <div class="app-icon"><img src="{{ info.Icon }}" onerror="this.remove()" /></div>
+      <div class="app-name">{{ info.AppName }}</div>
+      <div class="app-shortshortnote">{{ info.shortshortnote }}</div>
+      <app-app-download-button [app]="info"></app-app-download-button>
+    </div>
+    <div class="app-tableinfo">
+      <p>
+        版本：<span>{{ info.Version }}</span>
+      </p>
+      <p>
+        大小：<span>{{ info.Size }}</span>
+      </p>
+      <p>
+        下载：<span>{{ info.DownloadCount }}</span>
+      </p>
+      <p>
+        类别：<span>{{ info.TypeName }}</span>
+      </p>
+      <p>
+        更新日期：<span>{{ info.UpdateTime }}</span>
+      </p>
+      <p>软件语言：<span>简体中文、繁体中文、英文</span></p>
+      <p [attr.title]="info.Company">
+        软件作者：<span>{{ info.Company }}</span>
+      </p>
+      <p [attr.title]="info.System">
+        系统要求：<span>{{ info.System }}</span>
+      </p>
+    </div>
+    <app-app-photos *ngIf="info.iPhoneImages.length > 0 || info.iPadImages.length > 0"
+      [iPhonePhotos]="info.iPhoneImages" [iPadPhotos]="info.iPadImages"></app-app-photos>
+    <div class="app-newnote" *ngIf="info.NewVersionNote">
+      <h5>新功能</h5>
+      <p [innerHTML]="info.NewVersionNote"></p>
+    </div>
+    <div class="app-longnote" *ngIf="info.LongNote">
+      <h5>内容提要</h5>
+      <p [innerHTML]="info.LongNote"></p>
+    </div>
+    <div class="app-historyApp">
+      <div class="historyHd">
+        <span>历史版本</span>
+        <p>想要其他版本，可以通过许愿告诉我们<a (click)="appsService.setClarenceApp(info)">我要许愿</a></p>
+        <div style="clear: both;"></div>
+      </div>
+      <div class="historyCt">
+        <ul>
+          <li *ngFor="let item of historyArray">
+            <div> 
+              <span> {{item.Version}} </span>
+              <font>({{item.Size}} | {{item.releasetime}})</font>
+            </div>
+            <p title="{{item.versionnote}}">{{item.versionnote}}</p> 
+            <app-app-download-button [app]="item"></app-app-download-button>
+          </li>
+          <h3 *ngIf="historyArray.length==0">暂无历史版本</h3>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+

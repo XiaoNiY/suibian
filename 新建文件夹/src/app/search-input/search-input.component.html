@@ -1,0 +1,40 @@
+<div class="search" [attr.id]="id || ''" [class.active]="keyword">
+  <svg class="icon" aria-hidden="true">
+    <use [attr.xlink:href]="'#icon-search'"></use>
+  </svg>
+  <app-dropdown
+    *ngIf="typeSelect"
+    [id]="typeSelect.id"
+    [options]="typeSelect.options"
+    [selected]="typeSelect.selected"
+    [position]="[false, false, true, true]"
+    (select)="typeSelectChange($event)"
+  >
+  </app-dropdown>
+  <input
+    placeholder="{{ placeholder }}"
+    maxlength="20"
+    [(ngModel)]="keyword"
+    (keyup)="keyUp($event)"
+    (focus)="focus($event)"
+    (blur)="blur($event)"
+    #inputEl
+  />
+  <a
+    class="btn btn-inline btn-clear"
+    (click)="clear($event)"
+    *ngIf="keyword"
+    >
+    <svg class="icon" aria-hidden="true">
+      <use [attr.xlink:href]="'#icon-close'"></use>
+    </svg>
+  </a>
+  <div class="dropdown dropdownLeft dropdownBottom" *ngIf="keyword && suggests">
+    <a
+      class="btn btn-default"
+      (click)="searching($event)"
+      *ngFor="let item of suggests"
+      [innerHtml]="item.key || item.name"
+    ></a>
+  </div>
+</div>

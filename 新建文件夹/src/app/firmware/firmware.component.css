@@ -1,0 +1,47 @@
+.funcType {
+  position: absolute;
+  right:10px;
+  top:10px;
+}
+.funcType>.btn {
+  width:72px;
+}
+
+.pages {
+  width:100%;
+  left:0;
+}
+
+.btn-refresh {
+  width:65px;
+  float: left;
+  margin-top:10px;
+  margin-left:10px;
+  position: relative;
+  text-indent: 23px;
+  color:#4e545f;
+  border-color:#FFF;
+}
+.btn-refresh:hover {
+  color:#236ee7;
+  background:#fafafa;
+  border-color:#fafafa;
+}
+.btn-refresh:active {
+  color:#236ee7;
+  background:#eef5ff;
+  border-color:#eef5ff;
+}
+
+.btn-refresh svg {
+  font-size:20px;
+  position: absolute;
+  left:9px;
+  top:50%;
+  margin-top:-10px;
+}
+
+app-dropdown {
+  margin: 10px 0 0 10px;
+  float:left;
+}

@@ -1,0 +1,46 @@
+<div id="layout" class="layout">
+  <div class="topbar">
+    <app-page-controller
+      (paging)="paging($event)"
+      (refreshing)="refreshing($event)"
+    ></app-page-controller>
+    <app-search-input
+      [placeholder]="'搜索壁纸'"
+      [suggests]="wapersService.keywordSuggests"
+      (search)="search($event)"
+      (keywordSuggests)="keywordSuggests($event)"
+    ></app-search-input>
+  </div>
+  <app-page-nav
+    [navData]="wapersService.nav"
+    [activedNav]="activedNav"
+    (navigation)="navigation($event)"
+    (changeDevice)="changeDevice($event)"
+  ></app-page-nav>
+  <div class="pages">
+    <div
+      *ngFor="let item of pages"
+      class="page"
+      [class.active]="activedPage == item"
+      [class.notitle]="item.ptype == 'classify'"
+      [class.search]="item.keyword"
+    >
+      <app-waper-table
+        *ngIf="item.ptype == 'wapers'"
+        [remd]="item.remd"
+        [model]="item.model"
+        [typeid]="item.typeid"
+        [keyword]="item.keyword"
+        [title]="item.title"
+        [refreshFlag]="item.refreshFlag"
+        (navigation)="navigation($event)"
+        (viewWaper)="viewWaper($event)"
+      ></app-waper-table>
+    </div>
+  </div>
+</div>
+<app-waper-viewer></app-waper-viewer>
+
+<app-dlog *ngIf="dlogService.debug"></app-dlog>
+
+<app-message></app-message>

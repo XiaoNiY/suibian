@@ -1,0 +1,65 @@
+
+
+.dlog {
+  width:100%;
+  position: fixed;
+  bottom:0;
+  left:0;
+  z-index: 9;
+}
+.dlog-content {
+  width:100vw;
+  background: rgba(0, 0, 0, 0.8);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
+  position: absolute;
+  right:0;
+  bottom:0;
+}
+.logs {
+  padding:0 10px;
+  height:30vh;
+  min-height: 300px;
+  overflow: scroll;
+}
+.logs .log p {
+  color:#ffc368;
+  font-size:12px;
+  word-wrap: break-word;
+  margin-bottom:10px;
+}
+.logs .log p .btn-inline {
+  color:#3f3;
+}
+.btn-toggle {
+  width:20px;
+  height:20px;
+  line-height: 20px;
+  border-radius: 10px;
+  text-align: center;
+  background:#007aff;
+  color:#FFF;
+  font-size:10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
+  position: absolute;
+  left:10px;
+  bottom:100px;
+  z-index: 5;
+}
+.menus {
+  width:100%;
+  padding:10px;
+}
+.menus a {
+  display: inline-block;
+  line-height: 20px;
+  background:#007aff;
+  color:#FFF;
+  padding: 0 8px;
+  margin-right:3px;
+}
+.menus input {
+  width:120px;
+  height:20px;
+  border:0;
+  padding: 0 5px;
+}

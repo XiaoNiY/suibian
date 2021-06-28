@@ -1,0 +1,27 @@
+<div class="dlog">
+  <div class="dlog-content" *ngIf="display">
+    <div class="menus">
+      <a class="btn btn-primary" (click)="clear()">Clear</a>
+      <a class="btn btn-primary" (click)="toTop()">ToTop</a>
+      <a class="btn btn-primary" (click)="toBottom()">ToBottom</a>
+      <input
+        placeholder="日志过滤"
+        [(ngModel)]="filterKeyword"
+        (keyup)="filterKeyUp($event)"
+      />
+    </div>
+    <div class="logs" #logTable>
+      <div class="log" *ngFor="let log of dlogService.logs">
+        <p *ngIf="filterKeyword ? log.log.indexOf(filterKeyword) > -1 || log.name.indexOf(filterKeyword) > -1 : true">
+          {{ log.time | date:'yyyy-MM-dd HH:mm:ss' }}
+          &lt;<span class="btn btn-inline" (click)="filter(log.name)">{{ log.name }}</span>&gt;
+          {{ log.log }}
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="btn btn-primary btn-toggle" (click)="toggle()">
+    <span *ngIf="display">CL</span>
+    <span *ngIf="!display">VL</span>
+  </div>
+</div>

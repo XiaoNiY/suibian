@@ -1,0 +1,7 @@
+<div class="error">
+  <p>
+    <img src="{{ icon }}" />
+    <span>{{ message }}</span>
+    <a class="btn btn-inline" *ngIf="retry" (click)="doRetry($event)">点击重试</a>
+  </p>
+</div>

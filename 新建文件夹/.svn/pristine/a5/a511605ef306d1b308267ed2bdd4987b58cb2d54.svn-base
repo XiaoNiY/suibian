@@ -1,0 +1,38 @@
+<div class="viewer" *ngIf="wapersService.viewer.waper">
+  <div
+    class="image-box"
+    [style.width]="waperWidth + 'px'"
+   >
+    <i class="icon icon-loading" *ngIf="!wapersService.viewer.waper.iargeImage"></i>
+    <img *ngIf="wapersService.viewer.waper.iargeImage" src="{{wapersService.viewer.waper.iargeImage.src}}" />
+  </div>
+  <div class="btn btn-inline btn-prev" [class.disabled]="!wapersService.viewer.waper.prev" (click)="prev()">
+    <svg class="icon" aria-hidden="true">
+      <use [attr.xlink:href]="'#icon-arrow-left2'"></use>
+    </svg>
+  </div>
+  <div class="btn btn-inline btn-next" [class.disabled]="!wapersService.viewer.waper.next && wapersService.viewer.waperTable.nomore" (click)="next()">
+    <svg class="icon" aria-hidden="true">
+      <use [attr.xlink:href]="'#icon-arrow-right2'"></use>
+    </svg>
+  </div>
+  <div class="btn btn-inline btn-close" (click)="close()">
+    <svg class="icon" aria-hidden="true">
+      <use [attr.xlink:href]="'#icon-close'"></use>
+    </svg>
+  </div>
+
+  <div class="btns">
+    <div class="btn btn-inline btn-exportAlbum"
+      [class.disabled]="!pccService.activedDevice"
+      (click)="download(3)"
+    >导入到设备相册</div>
+    <div class="btn btn-inline btn-exportDevice"
+      [class.disabled]="!pccService.activedDevice"
+      (click)="download(2)"
+    >导入到设备图库</div>
+    <div class="btn btn-inline btn-exportLocal"
+      (click)="download(1)"
+    >下载到电脑</div>
+  </div>
+</div>

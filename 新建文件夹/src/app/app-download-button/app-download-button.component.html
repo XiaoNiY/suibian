@@ -1,0 +1,98 @@
+<!-- 未连接设备 未有应用信息 -->
+<a
+  class="btn btn-default btn-appDownload"
+  *ngIf="!pccService.activedDevice && !pccService.deviceApps[app.downId]"
+  title="点击下载应用"
+  (click)="download()"
+>下载</a>
+
+<!-- 未连接设备 应用下载中 -->
+<a
+  class="btn btn-default btn-appDownload downloading"
+  *ngIf="!pccService.activedDevice && pccService.deviceApps[app.downId] && pccService.deviceApps[app.downId].status == 101"
+  title="正在下载应用"
+  (click)="download()"
+>下载中</a>
+
+<!-- 未连接设备 应用暂停下载 -->
+<a
+  class="btn btn-default btn-appDownload pause"
+  *ngIf="!pccService.activedDevice && pccService.deviceApps[app.downId] && pccService.deviceApps[app.downId].status == 106"
+  title="已暂停下载，点击继续下载"
+  (click)="download()"
+>已暂停</a>
+
+<!-- 未连接设备 应用已下载 -->
+<a
+  class="btn btn-default btn-appDownload downloaded"
+  *ngIf="!pccService.activedDevice && pccService.deviceApps[app.downId] && pccService.deviceApps[app.downId].status == 102"
+  title="应用已下载"
+  (click)="download()"
+>已下载</a>
+
+<!-- 未连接设备 应用未知状态 -->
+<a
+  class="btn btn-default btn-appDownload"
+  *ngIf="!pccService.activedDevice && pccService.deviceApps[app.downId] && pccService.deviceApps[app.downId].status == 100"
+  title="点击下载应用"
+  (click)="download()"
+>下载</a>
+
+
+<!-- 已连接设备 未有应用信息 -->
+<a
+  class="btn btn-default btn-appDownload install"
+  *ngIf="pccService.activedDevice && !pccService.deviceApps[app.downId]"
+  title="点击下载并安装应用"
+  (click)="download()"
+>安装</a>
+
+<!-- 已连接设备 应用下载中 -->
+<a
+  class="btn btn-default btn-appDownload downloading"
+  *ngIf="pccService.activedDevice && pccService.deviceApps[app.downId] && pccService.deviceApps[app.downId].status == 201"
+  title="下载中"
+  (click)="download()"
+>下载中</a>
+
+<!-- 已连接设备 应用暂停下载 -->
+<a
+  class="btn btn-default btn-appDownload pause"
+  *ngIf="pccService.activedDevice && pccService.deviceApps[app.downId] && pccService.deviceApps[app.downId].status == 206"
+  title="已暂停下载，点击继续下载"
+  (click)="download()"
+>已暂停</a>
+
+<!-- 已连接设备 应用已下载 -->
+<a
+  class="btn btn-default btn-appDownload downloaded"
+  *ngIf="pccService.activedDevice && pccService.deviceApps[app.downId] && pccService.deviceApps[app.downId].status == 202"
+  title="应用已下载，点击安装应用"
+  (click)="download()"
+>安装</a>
+
+<!-- 已连接设备 应用安装中 -->
+<a
+  class="btn btn-default btn-appDownload installing"
+  *ngIf="pccService.activedDevice && pccService.deviceApps[app.downId] && pccService.deviceApps[app.downId].status == 203"
+  title="正在安装应用"
+  (click)="download()"
+>安装中</a>
+
+<!-- 已连接设备 应用已安装 -->
+<a
+  class="btn btn-default btn-appDownload installed"
+  *ngIf="pccService.activedDevice && pccService.deviceApps[app.downId] && pccService.deviceApps[app.downId].status == 204"
+  title="应用已安装，点击重新安装"
+  (click)="download()"
+>已安装</a>
+
+<!-- 已连接设备 应用未知状态 -->
+<a
+  class="btn btn-default btn-appDownload"
+  *ngIf="pccService.activedDevice && pccService.deviceApps[app.downId] && pccService.deviceApps[app.downId].status == 200"
+  title="点击下载并安装应用"
+  (click)="download()"
+>安装</a>
+
+<!-- <span style="font-size:10px;color:#999;" *ngIf="dlogService.debug">{{ app.id }} | {{ pccService.deviceApps[app.downId] && pccService.deviceApps[app.downId].status || 0 }}</span> -->

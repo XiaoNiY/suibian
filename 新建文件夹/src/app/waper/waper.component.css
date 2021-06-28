@@ -1,0 +1,4 @@
+
+app-page-nav /deep/ nav:hover::-webkit-scrollbar {
+  width:5px;
+}

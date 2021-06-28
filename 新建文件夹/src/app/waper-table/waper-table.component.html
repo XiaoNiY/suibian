@@ -1,0 +1,57 @@
+<div class="page-title">
+  <h2 *ngIf="title">{{ title }}</h2>
+  <div class="title-right">
+    <app-dropdown
+      [id]="'select-waperModels'"
+      [label]="'选择设备'"
+      [multiple]="true"
+      [options]="wapersService.waperModels"
+      [selected]="model"
+      (select)="selectModel($event)"
+    >
+    </app-dropdown>
+  </div>
+</div>
+<div class="searchTitle" *ngIf="keyword">
+  <span>在“{{ model.name }} 壁纸”里，搜索“</span>
+  <span class="keyword">{{ keyword }}</span>
+  <span>”，找到</span>
+</div>
+<div class="page-content" (scroll)="onScroll($event)" #pagecontent>
+  <div class="page-loading" *ngIf="status === 'loading' && pageno == 1">
+    <i class="icon icon-loading"></i>加载中...
+  </div>
+
+  <app-error
+    *ngIf="error"
+    [message]="error.message"
+    [icon]="error.icon"
+    [retry]="error.retry"
+    (retryEvent)="reset()"
+  ></app-error>
+
+  <div>
+    <div class="wapers-body">
+      <div class="wapers-item"
+        [class.loading]="!waper.middleImage"
+        *ngFor="let waper of datas"
+        (click)="viewWaper(waper)"
+      >
+        <i class="icon icon-loading" *ngIf="!waper.middleImage"></i>
+        <div
+          class="waper-box"
+          [style.paddingBottom]="model.scale * 100 + '%'"
+        >
+          <img *ngIf="waper.middleImage" src="{{ waper.middleImage.src }}" />
+        </div>
+      </div>
+      <app-data-status
+        *ngIf="pageno > 1"
+        [status]="status"
+        (retryEvent)="getDatas()"
+      ></app-data-status>
+    </div>
+    <p class="btn btn-pi">第{{ viewPageno }}页</p>
+    <app-btn-totop [pcec]="'page-content'"></app-btn-totop>
+  </div>
+</div>

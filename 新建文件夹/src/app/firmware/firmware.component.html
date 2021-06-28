@@ -1,0 +1,110 @@
+<div id="layout" class="layout">
+    <div class="topbar">
+      <a class="btn btn-off btn-refresh" (click)="refreshing($event)">
+        <svg class="icon" aria-hidden="true">
+          <use [attr.xlink:href]="'#icon-refresh'"></use>
+        </svg>
+        刷新
+      </a>
+      <app-dropdown
+        [options]="groupTypes"
+        [selected]="groupType"
+        [position]="[0, 0, 1, 1]"
+        (select)="changeGroupType($event)"
+      >
+      </app-dropdown>
+
+      <app-dropdown
+        *ngIf="groupType.value == 1"
+        [options]="deviceTypes"
+        [selected]="deviceType"
+        [position]="[0, 0, 1, 1]"
+        (select)="changeDeviceType($event)"
+      >
+      </app-dropdown>
+
+      <app-dropdown
+        *ngIf="groupType.value == 1 && deviceType.value == 1"
+        [id]="'select-iPhoneDevices'"
+        [multiple]="true"
+        [options]="iPhoneDevices"
+        [selected]="iPhoneDevice"
+        [position]="[0, 0, 1, 1]"
+        (select)="changeiPhoneDevice($event)"
+      >
+      </app-dropdown>
+
+      <app-dropdown
+        *ngIf="groupType.value == 1 && deviceType.value == 2"
+        [id]="'select-iPadDevices'"
+        [multiple]="true"
+        [options]="iPadDevices"
+        [selected]="iPadDevice"
+        [position]="[0, 0, 1, 1]"
+        (select)="changeiPadDevice($event)"
+      >
+      </app-dropdown>
+
+      <app-dropdown
+        *ngIf="groupType.value == 1 && deviceType.value == 3"
+        [multiple]="true"
+        [id]="'select-iPodTouchDevices'"
+        [options]="iPodTouchDevices"
+        [selected]="iPodTouchDevice"
+        [position]="[0, 0, 1, 1]"
+        (select)="changeiPodTouchDevice($event)"
+      >
+      </app-dropdown>
+
+      <app-dropdown
+        *ngIf="groupType.value == 2"
+        [options]="iOSVersionGroups"
+        [selected]="iOSVersionGroup"
+        [position]="[0, 0, 1, 1]"
+        (select)="changeiOSVersionGroup($event)"
+      >
+      </app-dropdown>
+
+      <app-dropdown
+        *ngIf="groupType.value == 2"
+        [id]="'select-iOSVersion'"
+        [multiple]="true"
+        [options]="iOSVersions[iOSVersionGroup.value]"
+        [selected]="iOSVersion"
+        [position]="[0, 0, 1, 1]"
+        (select)="changeiOSVersion($event)"
+      >
+      </app-dropdown>
+
+      <div class="btn-group funcType">
+        <a
+          class="btn"
+          *ngFor="let item of funcTypes"
+          [class.btn-on]="item == funcType"
+          [class.btn-off]="item != funcType"
+          (click)="changeFuncType(item)"
+        >
+          {{ item.name }}
+        </a>
+      </div>
+    </div>
+    <div class="pages">
+      <div
+        *ngFor="let item of pages"
+        class="page notitle"
+        [class.active]="activedPage == item"
+      >
+        <app-firmware-table
+          [model]="item.model"
+          [ios]="item.ios"
+          [groupType]="item.groupType"
+          [funcType]="funcType"
+          [refreshFlag]="item.refreshFlag"
+        ></app-firmware-table>
+      </div>
+    </div>
+  </div>
+  
+  <app-dlog *ngIf="dlogService.debug"></app-dlog>
+  
+  <app-message></app-message>

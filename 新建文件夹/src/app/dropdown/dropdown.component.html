@@ -1,0 +1,30 @@
+<div class="select" [class.small]="small" id="{{ id }}">
+  <p class="label" *ngIf="label">{{ label }}</p>
+  <div (click)="toggle()" class="btn">
+    <div class="name" [innerHtml]="selected.shortName || selected.name"></div>
+    <svg class="icon" aria-hidden="true">
+      <use [attr.xlink:href]="display ? '#icon-arrow-up' : '#icon-arrow-down'"></use>
+    </svg>
+  </div>
+  <div
+    class="dropdown"
+    [class.dropdownMultiple]="multiple"
+    [class.dropdownTop]="position[0]"
+    [class.dropdownRight]="position[1]"
+    [class.dropdownBottom]="position[2]"
+    [class.dropdownLeft]="position[3]"
+    *ngIf="display"
+  >
+    <div
+      class="btn btn-default"
+      *ngFor="let item of options"
+      [class.active]="item == selected"
+      (click)="change(item)"
+    >
+      <svg class="icon" aria-hidden="true" *ngIf="item == selected">
+        <use [attr.xlink:href]="'#icon-selected'"></use>
+      </svg>
+      <div class="name" [innerHtml]="item.name"></div>
+    </div>
+  </div>
+</div>

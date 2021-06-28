@@ -1,0 +1,52 @@
+<div class="banners-box">
+
+  <app-error
+    *ngIf="error"
+    [message]="error.message"
+    [icon]="error.icon"
+    [retry]="error.retry"
+    (retryEvent)="reset()"
+  ></app-error>
+
+  <div
+    *ngIf="banners.length > 0"
+    class="banners"
+    (mouseenter)="stop()"
+    (mouseleave)="autoPlay()"
+  >
+    <a
+      class="btn btn-inline item"
+      *ngFor="let item of banners"
+      [@bannerTransition]="item.state"
+      (click)="viewDetail(item)"
+    >
+      <img src="https://d-image.i4.cn/pubImg/pc_ad/{{ item.image }}" />
+    </a>
+    <div class="indexbox">
+      <a
+        class="btn btn-inline btn-index"
+        *ngFor="let item of banners"
+        [class.active]="actived == item"
+        (click)="to(item, 1)"
+      ></a>
+    </div>
+    <a
+      class="btn btn-inline btn-prev"
+      *ngIf="controllerDisplay"
+      (click)="to(actived.prev, 0)"
+      >
+      <svg class="icon" aria-hidden="true">
+        <use [attr.xlink:href]="'#icon-arrow-left'"></use>
+      </svg>
+    </a>
+    <a
+      class="btn btn-inline btn-next"
+      *ngIf="controllerDisplay"
+      (click)="to(actived.next, 0)"
+      >
+      <svg class="icon" aria-hidden="true">
+        <use [attr.xlink:href]="'#icon-arrow-right'"></use>
+      </svg>
+    </a>
+  </div>
+</div>

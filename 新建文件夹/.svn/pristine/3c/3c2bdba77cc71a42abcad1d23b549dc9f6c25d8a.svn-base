@@ -1,0 +1,88 @@
+<div class="page-title" *ngIf="specialid == 0 && !keyword">
+  <h2 *ngIf="title">{{ title }}</h2>
+  <div class="title-right">
+    <app-dropdown
+      *ngIf="sort == 1 || sort == 2"
+      [multiple]="true"
+      [label]="'分类'"
+      [options]="appsService.appTypes[sort]"
+      [selected]="appType"
+      (select)="selectType($event)"
+    >
+    </app-dropdown>
+    <div class="nav-hd" *ngIf="model == 'iPad'">
+      <a
+        class="btn btn-inline btn-checkbox btn-hd"
+        [class.checked]="hd"
+        (click)="changeHD()"
+      >
+        <svg class="icon" aria-hidden="true" *ngIf="hd">
+          <use [attr.xlink:href]="'#icon-selected'"></use>
+        </svg>
+        仅显示高清版（HD）</a
+      >
+    </div>
+  </div>
+</div>
+<div class="searchTitle" *ngIf="keyword">
+  <span>在“</span> <span>{{ model }}{{ jail ? "越狱" : "正版" }}资源</span>
+  <span>”里，搜索“</span> <span class="keyword">{{ keyword }}</span>
+  <span>”找到</span> <span class="count">{{ searchCount }}</span>
+  <span>条相关数据</span>
+</div>
+<div class="page-content" (scroll)="onScroll($event)" #pagecontent>
+  <div class="page-loading" *ngIf="status === 'loading' && pageno == 1">
+    <i class="icon icon-loading"></i>加载中...
+  </div>
+
+  <app-error
+    *ngIf="error"
+    [message]="error.message"
+    [icon]="error.icon"
+    [retry]="error.retry"
+    (retryEvent)="reset()"
+  ></app-error>
+
+  <div>
+    <app-app-banner
+      *ngIf="remd == 1 && !keyword && datas.length > 0"
+      [model]="model"
+      [jail]="jail"
+      [refreshFlag]="refreshFlag"
+      (navigation)="navigation.emit($event)"
+    ></app-app-banner>
+    <div class="specialimage" *ngIf="specialid && specialimage">
+      <img src="{{ specialimage }}" />
+    </div>
+    <div>
+      <div
+        class="apps-item"
+        [class.hd]="model == 'iPad' && app.isfull == 1"
+        [style.background-color]="dlogService.debug && app.sizebyte < 50000000 ? 'rgb(240, 255, 240)' : ''"
+        *ngFor="let app of datas"
+      >
+        <div class="btn btn-inline apps-item-icon" (click)="selectApp(app)">
+          <img src="{{ app.icon }}" onerror="this.remove()" />
+        </div>
+        <p class="btn btn-inline apps-item-name" (click)="selectApp(app)" [attr.title]="app.appname">
+          <span class="hd" *ngIf="model == 'iPad' && app.isfull == 1"></span>
+          {{ app.appname }}
+        </p>
+        <p class="apps-item-info">
+          {{ app.downloaded }}次 | {{ app.shortversion }} | {{ app.size }}
+        </p>
+        <p class="apps-item-slogan">{{ app.slogan }}</p>
+        <app-app-download-button
+          [app]="app"
+        ></app-app-download-button>
+      </div>
+      <app-data-status
+        *ngIf="pageno > 1"
+        [status]="status"
+        (retryEvent)="getDatas()"
+      ></app-data-status>
+    </div>
+    <p class="btn btn-pi">第{{ viewPageno }}页</p>
+    <app-btn-totop [pcec]="'page-content'"></app-btn-totop>
+  </div>
+</div>

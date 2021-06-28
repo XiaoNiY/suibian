@@ -1,0 +1,60 @@
+<div id="layout" class="layout">
+  <div class="topbar">
+    <app-page-controller
+      (paging)="paging($event)"
+      (refreshing)="refreshing($event)"
+    ></app-page-controller>
+    <app-search-input
+      [id]="'search-ring'"
+      [placeholder]="'搜索铃声'"
+      [suggests]="ringsService.keywordSuggests"
+      [typeSelect]="typeSelect"
+      (search)="search($event)"
+      (keywordSuggests)="keywordSuggests($event)"
+    ></app-search-input>
+  </div>
+  <app-page-nav
+    [navData]="this.ringsService.nav"
+    [activedNav]="activedNav"
+    (navigation)="navigation($event)"
+    (changeDevice)="changeDevice($event)"
+  ></app-page-nav>
+  <div class="pages">
+    <div
+      *ngFor="let item of pages"
+      class="page"
+      [class.active]="activedPage == item"
+      [class.notitle]="item.keyword || item.ptype == 'classify'"
+      [class.search]="item.keyword"
+    >
+      <iframe
+        [src]="item.src"
+        *ngIf="item.ptype == 'iframe' && item.src"
+      ></iframe>
+      <app-ring-table
+        *ngIf="item.ptype == 'rings'"
+        [ringType]="item.ringType"
+        [remd]="item.remd"
+        [title]="item.title"
+        [keyword]="item.keyword"
+        [refreshFlag]="item.refreshFlag"
+        (navigation)="navigation($event)"
+        (kuyinSearch)="toKuyinSearch($event)"
+      ></app-ring-table>
+      <div class="page-content classify" *ngIf="item.ptype == 'classify'">
+        <div
+          class="btn btn-inline classify-item"
+          *ngFor="let item of ringsService.ringTypes"
+          (click)="classifyNavigation(item)"
+        >
+          <img src="{{ item.icon }}" />
+          <p>{{ item.name }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-dlog *ngIf="dlogService.debug"></app-dlog>
+
+<app-message></app-message>

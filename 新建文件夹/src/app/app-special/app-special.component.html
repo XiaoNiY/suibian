@@ -1,0 +1,21 @@
+<div class="page-content">
+  <div class="page-loading" *ngIf="status === 'loading'">
+    <i class="icon icon-loading"></i>加载中...
+  </div>
+  
+  <app-error
+    *ngIf="error"
+    [message]="error.message"
+    [icon]="error.icon"
+    [retry]="error.retry"
+    (retryEvent)="reset()"
+  ></app-error>
+
+  <div class="datas" *ngIf="datas.length > 0">
+    <a class="btn btn-inline special-item" (click)="navigateTo(item)" *ngFor="let item of datas">
+      <div class="special-box">
+        <img src="{{ item.icon2 }}" />
+      </div>
+    </a>
+  </div>
+</div>

@@ -1,0 +1,39 @@
+<div id="layout" class="layout" onselect="return false" onselectstart="return false">
+    <div class="topbar">
+        <app-page-controller (paging)="paging($event)" (refreshing)="refreshing($event)"></app-page-controller>
+        <app-search-input [placeholder]="'搜索应用游戏'" [suggests]="appsService.keywordSuggests" (search)="search($event)"
+            (keywordSuggests)="keywordSuggests($event)"></app-search-input>
+    </div>
+    <app-page-nav [navData]="navData" [activedNav]="activedNav" (navigation)="navigation($event)"
+        (changeDevice)="changeDevice($event)"></app-page-nav>
+    <div class="btn-group nav-model">
+        <a class="btn" [class.btn-off]="model != 'iPhone'" [class.btn-on]="model == 'iPhone'"
+            (click)="selectModel('iPhone')">iPhone</a>
+        <a class="btn" [class.btn-off]="model != 'iPad'" [class.btn-on]="model == 'iPad'"
+            (click)="selectModel('iPad')">iPad</a>
+    </div>
+    <div class="pages">
+        <div *ngFor="let item of pages" class="page" [class.active]="activedPage == item" [class.notitle]="
+        item.specialid != 0 || item.keyword || item.ptype == 'detail'
+      " [class.search]="item.keyword">
+            <app-app-tables *ngIf="item.ptype == 'apps'" [model]="item.model" [jail]="item.jail" [auth]="item.auth"
+                [sort]="item.sort" [appType]="item.appType" [remd]="item.remd" [specialid]="item.specialid"
+                [specialimage]="item.specialimage" [hd]="item.hd" [ts]="item.ts" [title]="item.title"
+                [keyword]="item.keyword" [refreshFlag]="item.refreshFlag" (navigation)="navigation($event)">
+            </app-app-tables>
+            <app-app-detail *ngIf="item.ptype == 'detail'" [id]="item.id" [model]="item.model"
+                [pkagetype]="item.pkagetype" [from]="item.from" [ts]="item.ts" [refreshFlag]="item.refreshFlag">
+            </app-app-detail>
+            <app-app-special *ngIf="item.ptype == 'special'" [model]="item.model" [jail]="item.jail" [sort]="item.sort"
+                [title]="item.title" [refreshFlag]="item.refreshFlag" (navigation)="navigation($event)">
+            </app-app-special>
+        </div>
+    </div>
+</div>
+
+<app-app-report></app-app-report>
+<app-clarence></app-clarence>
+
+<app-dlog *ngIf="dlogService.debug"></app-dlog>
+
+<app-message></app-message>
